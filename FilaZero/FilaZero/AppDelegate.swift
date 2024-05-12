@@ -2,10 +2,11 @@
 //  AppDelegate.swift
 //  FilaZero
 //
-//  Created by Luan Alves Barroso on 12/05/24.
+//  Created by Luan Alves Barroso on 30/04/24.
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        AppDependencyConfigurer.configure()
         return true
     }
 
