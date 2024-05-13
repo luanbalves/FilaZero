@@ -17,21 +17,17 @@ import AuthServiceInterface
 final class RootCoordinator {
     
     private let navigationController: UINavigationController?
+    private let authService: AuthServiceInterface
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController?, authService: AuthServiceInterface) {
         self.navigationController = navigationController
-    }
-    
-    @MainActor
-    private func isUserLogged() -> Bool {
-        let authService = DC.shared.resolve(type: .singleInstance, for: AuthServiceInterface.self)
-        return authService.userSession != nil
+        self.authService = authService
     }
     
     @MainActor
     func makeInitialView() -> UIViewController {
         
-        if isUserLogged() {
+        if authService.userSession != nil {
             let gateway = HomeGateway()
             let homeView = gateway.makeHomeModule()
             let tabBarController = RootTabBarController(viewControllers: [homeView])

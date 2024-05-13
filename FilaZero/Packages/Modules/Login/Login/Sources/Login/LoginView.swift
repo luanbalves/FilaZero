@@ -55,7 +55,7 @@ struct LoginView: View {
             .background(Divider().frame(width: UIScreen.main.bounds.width - 35), alignment: .bottom)
             
             Button {
-                print("Login")
+                viewModel.signIn()
             } label: {
                 Text("Entrar")
             }

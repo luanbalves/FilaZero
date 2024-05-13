@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import DependencyContainer
+import AuthServiceInterface
 
 final class RegisterCoordinator {
     
@@ -18,7 +20,8 @@ final class RegisterCoordinator {
     }
     
     func makeViewController() -> UIViewController {
-        let view = RegisterView(viewModel: .init())
+        let authService = DC.shared.resolve(type: .singleInstance, for: AuthServiceInterface.self)
+        let view = RegisterView(viewModel: .init(authService: authService))
         let hostingVC = UIHostingController(rootView: view)
         hostingVC.title = "Registro"
         return hostingVC

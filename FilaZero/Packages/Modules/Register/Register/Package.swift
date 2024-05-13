@@ -5,6 +5,9 @@ import PackageDescription
 
 private let registerInterface = "RegisterInterface"
 private let components = "Components"
+private let authServiceInterface = "AuthServiceInterface"
+private let dependencyContainer = "DependencyContainer"
+
 let package = Package(
     name: "Register",
     platforms: [.iOS(.v15)],
@@ -16,7 +19,9 @@ let package = Package(
     ],
     dependencies: [
         .package(name: registerInterface, path: "../\(registerInterface)"),
-        .package(name: components, path: "../../\(components)/\(components)")
+        .package(name: components, path: "../../\(components)/\(components)"),
+        .package(name: authServiceInterface, path: "../../../FirebaseServices/Auth/\(authServiceInterface)"),
+        .package(name: dependencyContainer, path: "../../../\(dependencyContainer)")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,7 +30,9 @@ let package = Package(
             name: "Register",
             dependencies: [
                 .product(name: registerInterface, package: registerInterface),
-                .product(name: components, package: components)
+                .product(name: components, package: components),
+                .product(name: authServiceInterface, package: authServiceInterface),
+                .product(name: dependencyContainer, package: dependencyContainer)
             ]
         ),
         .testTarget(

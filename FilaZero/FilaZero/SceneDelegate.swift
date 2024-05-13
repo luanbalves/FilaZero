@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import DependencyContainer
+import AuthServiceInterface
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         let navigationController = UINavigationController()
-        window.rootViewController = RootCoordinator(navigationController: navigationController).makeInitialView()
+        let authService = DC.shared.resolve(type: .singleInstance, for: AuthServiceInterface.self)
+        window.rootViewController = RootCoordinator(navigationController: navigationController, authService: authService).makeInitialView()
         window.makeKeyAndVisible()
     }
 
