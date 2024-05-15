@@ -13,6 +13,8 @@ import LoginInterface
 import Login
 import AuthServices
 import AuthServiceInterface
+import HomeInterface
+import Home
 
 enum AppDependencyConfigurer {
     @MainActor static func configure() {
@@ -32,5 +34,11 @@ enum AppDependencyConfigurer {
         //MARK: - Auth Service Registration
         let authService = AuthService()
         DC.shared.register(type: .singlesInstance(authService), for: AuthServiceInterface.self)
+        
+        //MARK: - Home View Registration
+        let homeViewClosure: () -> HomeInterface = {
+            HomeGateway()
+        }
+        DC.shared.register(type: .closureBased(homeViewClosure), for: HomeInterface.self)
     }
 }

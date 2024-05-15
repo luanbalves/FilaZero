@@ -8,7 +8,7 @@ private let components = "Components"
 private let dependencyContainer = "DependencyContainer"
 private let loginInterface = "LoginInterface"
 private let authServiceInterface = "AuthServiceInterface"
-
+private let homeInterface = "HomeInterface"
 let package = Package(
     name: "Login",
     platforms: [.iOS(.v15)],
@@ -23,7 +23,8 @@ let package = Package(
         .package(name: components, path: "../../\(components)/\(components)"),
         .package(name: dependencyContainer, path: "../../../\(dependencyContainer)"),
         .package(name: loginInterface, path: "../\(loginInterface)"),
-        .package(name: authServiceInterface, path: "../../../FirebaseServices/Auth/\(authServiceInterface)")
+        .package(name: authServiceInterface, path: "../../../FirebaseServices/Auth/\(authServiceInterface)"),
+        .package(name: homeInterface, path: "../../Home/\(homeInterface)")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -35,7 +36,8 @@ let package = Package(
             .product(name: components, package: components),
             .product(name: dependencyContainer, package: dependencyContainer),
             .product(name: loginInterface, package: loginInterface),
-            .product(name: authServiceInterface, package: authServiceInterface)
+            .product(name: authServiceInterface, package: authServiceInterface),
+            .product(name: homeInterface, package: homeInterface)
         ]
         ),
         .testTarget(

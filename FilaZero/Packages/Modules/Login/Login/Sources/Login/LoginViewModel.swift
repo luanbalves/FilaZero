@@ -13,10 +13,12 @@ final class LoginViewModel: ObservableObject {
     @Published var password = ""
     private let registerButtonPressed: () -> Void
     private let authService: AuthServiceInterface
+    private let goToHome: () -> Void
     
-    init(registerButtonPressed: @escaping () -> Void, authService: AuthServiceInterface) {
+    init(registerButtonPressed: @escaping () -> Void, authService: AuthServiceInterface, goToHome: @escaping () -> Void) {
         self.registerButtonPressed = registerButtonPressed
         self.authService = authService
+        self.goToHome = goToHome
     }
     
     func didPressRegisterButton() {
@@ -27,6 +29,7 @@ final class LoginViewModel: ObservableObject {
         Task {
             do {
                 try await authService.signIn(withEmail: email, password: password)
+                goToHome()
             } catch {
                 print(error.localizedDescription)
                 #warning("Fazer o alerta de erro.")

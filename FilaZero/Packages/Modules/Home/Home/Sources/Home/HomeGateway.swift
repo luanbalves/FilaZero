@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import HomeInterface
 
-public struct HomeGateway {
+public struct HomeGateway: HomeInterface {
     public init() {
         
     }

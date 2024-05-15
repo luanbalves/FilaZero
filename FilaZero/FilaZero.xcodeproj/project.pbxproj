@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F61C8442BF2D2FD001E6309 /* HomeInterface */; };
 		3FB2B2722BF17F280043407C /* AuthServiceInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2712BF17F280043407C /* AuthServiceInterface */; };
 		3FB2B2742BF17F280043407C /* AuthServices in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2732BF17F280043407C /* AuthServices */; };
 		3FB2B2762BF17F280043407C /* CommonModels in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2752BF17F280043407C /* CommonModels */; };
@@ -27,10 +28,10 @@
 		3FDB48A32BF16EEA001BF8E8 /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 3FDB48A22BF16EEA001BF8E8 /* DependencyContainer */; };
 		3FDB48A62BF17058001BF8E8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3FDB48A52BF17058001BF8E8 /* FirebaseFirestore */; };
 		3FDB48A82BF1705E001BF8E8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3FDB48A72BF1705E001BF8E8 /* FirebaseAuth */; };
-		3FDB48D72BF17521001BF8E8 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB48D62BF17521001BF8E8 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F61C8432BF2D171001E6309 /* HomeInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeInterface; sourceTree = "<group>"; };
 		3FB2B26E2BF176F10043407C /* AuthServiceInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServiceInterface; sourceTree = "<group>"; };
 		3FB2B26F2BF177980043407C /* AuthServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServices; sourceTree = "<group>"; };
 		3FB2B2702BF178660043407C /* CommonModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonModels; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		3FDB48C52BF173F6001BF8E8 /* Register */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Register; sourceTree = "<group>"; };
 		3FDB48C62BF17425001BF8E8 /* RegisterInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RegisterInterface; sourceTree = "<group>"; };
 		3FDB48D12BF174BC001BF8E8 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
-		3FDB48D62BF17521001BF8E8 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +69,7 @@
 				3FB2B2822BF17F280043407C /* RegisterInterface in Frameworks */,
 				3FB2B27A2BF17F280043407C /* Home in Frameworks */,
 				3FB2B27C2BF17F280043407C /* Login in Frameworks */,
+				3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */,
 				3FDB48A62BF17058001BF8E8 /* FirebaseFirestore in Frameworks */,
 				3FB2B2762BF17F280043407C /* CommonModels in Frameworks */,
 			);
@@ -113,7 +114,6 @@
 		3FDB48782BF16B69001BF8E8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3FDB48D42BF1750C001BF8E8 /* AuthService */,
 				3FDB48792BF16B70001BF8E8 /* Root */,
 			);
 			path = Modules;
@@ -186,6 +186,7 @@
 		3FDB48C72BF1744D001BF8E8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3F61C8432BF2D171001E6309 /* HomeInterface */,
 				3FDB48D12BF174BC001BF8E8 /* Home */,
 			);
 			path = Home;
@@ -206,14 +207,6 @@
 				3FB2B26E2BF176F10043407C /* AuthServiceInterface */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		3FDB48D42BF1750C001BF8E8 /* AuthService */ = {
-			isa = PBXGroup;
-			children = (
-				3FDB48D62BF17521001BF8E8 /* AuthService.swift */,
-			);
-			path = AuthService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +238,7 @@
 				3FB2B27D2BF17F280043407C /* LoginInterface */,
 				3FB2B27F2BF17F280043407C /* Register */,
 				3FB2B2812BF17F280043407C /* RegisterInterface */,
+				3F61C8442BF2D2FD001E6309 /* HomeInterface */,
 			);
 			productName = FilaZero;
 			productReference = 3FDB485F2BF169F8001BF8E8 /* FilaZero.app */;
@@ -307,7 +301,6 @@
 				3FDB487B2BF16B8D001BF8E8 /* RootCoordinator.swift in Sources */,
 				3FDB487D2BF16B97001BF8E8 /* RootTabBarController.swift in Sources */,
 				3FDB48672BF169F8001BF8E8 /* AppDependencyConfigurer.swift in Sources */,
-				3FDB48D72BF17521001BF8E8 /* AuthService.swift in Sources */,
 				3FDB48632BF169F8001BF8E8 /* AppDelegate.swift in Sources */,
 				3FDB48652BF169F8001BF8E8 /* SceneDelegate.swift in Sources */,
 			);
@@ -535,6 +528,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F61C8442BF2D2FD001E6309 /* HomeInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HomeInterface;
+		};
 		3FB2B2712BF17F280043407C /* AuthServiceInterface */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthServiceInterface;

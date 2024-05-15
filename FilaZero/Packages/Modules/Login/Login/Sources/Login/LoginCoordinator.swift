@@ -11,6 +11,7 @@ import SwiftUI
 import RegisterInterface
 import DependencyContainer
 import AuthServiceInterface
+import HomeInterface
 
 final class LoginCoordinator {
     
@@ -24,7 +25,8 @@ final class LoginCoordinator {
         let authService = DC.shared.resolve(type: .singleInstance, for: AuthServiceInterface.self)
         let view = LoginView(viewModel: .init(
             registerButtonPressed: pushRegisterView,
-            authService: authService)
+            authService: authService,
+            goToHome: pushHomeView)
         )
         let hostingVC = UIHostingController(rootView: view)
         hostingVC.title = "Login"
@@ -36,5 +38,19 @@ final class LoginCoordinator {
         let gateway = DC.shared.resolve(type: .closureBased, for: RegisterInterface.self)
         let registerView = gateway.makeRegisterModule(navigationController: navigationController)
         navigationController.pushViewController(registerView, animated: true)
+    }
+    
+    func pushHomeView() {
+        DispatchQueue.main.async {
+            if let windowScene = UIApplication.shared.connectedScenes
+                                    .compactMap({ $0 as? UIWindowScene })
+                                    .first(where: { $0.activationState == .foregroundActive }),
+               let window = windowScene.windows.first {
+                let gateway = DC.shared.resolve(type: .closureBased, for: HomeInterface.self)
+                let homeViewController = gateway.makeHomeModule()
+                let tabBarController = RootTabBarController(viewControllers: [homeViewController])
+                window.rootViewController = tabBarController
+            }
+        }
     }
 }

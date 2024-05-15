@@ -4,6 +4,7 @@
 import PackageDescription
 
 private let authServiceInterface = "AuthServiceInterface"
+private let homeInterface = "HomeInterface"
 let package = Package(
     name: "Home",
     platforms: [.iOS(.v15)],
@@ -14,7 +15,8 @@ let package = Package(
             targets: ["Home"]),
     ],
     dependencies: [
-        .package(name: authServiceInterface, path: "../../../FirebaseServices/Auth/\(authServiceInterface)")
+        .package(name: authServiceInterface, path: "../../../FirebaseServices/Auth/\(authServiceInterface)"),
+        .package(name: homeInterface, path: "../\(homeInterface)")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -22,7 +24,8 @@ let package = Package(
         .target(
             name: "Home",
             dependencies: [
-                .product(name: authServiceInterface, package: authServiceInterface)
+                .product(name: authServiceInterface, package: authServiceInterface),
+                .product(name: homeInterface, package: homeInterface)
             ]
         ),
         .testTarget(
