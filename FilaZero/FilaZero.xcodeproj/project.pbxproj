@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3015AF2BF9487000F5DEB0 /* Orders in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3015AE2BF9487000F5DEB0 /* Orders */; };
+		3F3015B12BF9487000F5DEB0 /* OrdersInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3015B02BF9487000F5DEB0 /* OrdersInterface */; };
 		3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F61C8442BF2D2FD001E6309 /* HomeInterface */; };
+		3F890ED22BF6C8CD000F74B7 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 3F890ED12BF6C8CD000F74B7 /* Profile */; };
+		3F890ED42BF6C8CD000F74B7 /* ProfileInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F890ED32BF6C8CD000F74B7 /* ProfileInterface */; };
 		3FB2B2722BF17F280043407C /* AuthServiceInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2712BF17F280043407C /* AuthServiceInterface */; };
 		3FB2B2742BF17F280043407C /* AuthServices in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2732BF17F280043407C /* AuthServices */; };
 		3FB2B2762BF17F280043407C /* CommonModels in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2752BF17F280043407C /* CommonModels */; };
@@ -31,7 +35,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F3015AC2BF9477E00F5DEB0 /* OrdersInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdersInterface; sourceTree = "<group>"; };
+		3F3015AD2BF9485800F5DEB0 /* Orders */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Orders; sourceTree = "<group>"; };
 		3F61C8432BF2D171001E6309 /* HomeInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeInterface; sourceTree = "<group>"; };
+		3F890ECF2BF6C72D000F74B7 /* ProfileInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ProfileInterface; sourceTree = "<group>"; };
+		3F890ED02BF6C8B7000F74B7 /* Profile */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Profile; sourceTree = "<group>"; };
 		3FB2B26E2BF176F10043407C /* AuthServiceInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServiceInterface; sourceTree = "<group>"; };
 		3FB2B26F2BF177980043407C /* AuthServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServices; sourceTree = "<group>"; };
 		3FB2B2702BF178660043407C /* CommonModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonModels; sourceTree = "<group>"; };
@@ -59,10 +67,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F890ED22BF6C8CD000F74B7 /* Profile in Frameworks */,
 				3FB2B2722BF17F280043407C /* AuthServiceInterface in Frameworks */,
+				3F890ED42BF6C8CD000F74B7 /* ProfileInterface in Frameworks */,
 				3FB2B2802BF17F280043407C /* Register in Frameworks */,
 				3FDB48A32BF16EEA001BF8E8 /* DependencyContainer in Frameworks */,
+				3F3015AF2BF9487000F5DEB0 /* Orders in Frameworks */,
 				3FDB48A82BF1705E001BF8E8 /* FirebaseAuth in Frameworks */,
+				3F3015B12BF9487000F5DEB0 /* OrdersInterface in Frameworks */,
 				3FB2B2742BF17F280043407C /* AuthServices in Frameworks */,
 				3FB2B27E2BF17F280043407C /* LoginInterface in Frameworks */,
 				3FB2B2782BF17F280043407C /* Components in Frameworks */,
@@ -78,6 +90,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F3015A02BF9447700F5DEB0 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				3F3015AD2BF9485800F5DEB0 /* Orders */,
+				3F3015AC2BF9477E00F5DEB0 /* OrdersInterface */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		3F890EC32BF6C4B1000F74B7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3F890ED02BF6C8B7000F74B7 /* Profile */,
+				3F890ECF2BF6C72D000F74B7 /* ProfileInterface */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		3FDB48562BF169F8001BF8E8 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +179,8 @@
 		3FDB48A92BF170A2001BF8E8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				3F3015A02BF9447700F5DEB0 /* Orders */,
+				3F890EC32BF6C4B1000F74B7 /* Profile */,
 				3FDB48C72BF1744D001BF8E8 /* Home */,
 				3FDB48C42BF173C9001BF8E8 /* Register */,
 				3FDB48B62BF1731D001BF8E8 /* Components */,
@@ -239,6 +271,10 @@
 				3FB2B27F2BF17F280043407C /* Register */,
 				3FB2B2812BF17F280043407C /* RegisterInterface */,
 				3F61C8442BF2D2FD001E6309 /* HomeInterface */,
+				3F890ED12BF6C8CD000F74B7 /* Profile */,
+				3F890ED32BF6C8CD000F74B7 /* ProfileInterface */,
+				3F3015AE2BF9487000F5DEB0 /* Orders */,
+				3F3015B02BF9487000F5DEB0 /* OrdersInterface */,
 			);
 			productName = FilaZero;
 			productReference = 3FDB485F2BF169F8001BF8E8 /* FilaZero.app */;
@@ -528,9 +564,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F3015AE2BF9487000F5DEB0 /* Orders */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Orders;
+		};
+		3F3015B02BF9487000F5DEB0 /* OrdersInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OrdersInterface;
+		};
 		3F61C8442BF2D2FD001E6309 /* HomeInterface */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HomeInterface;
+		};
+		3F890ED12BF6C8CD000F74B7 /* Profile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Profile;
+		};
+		3F890ED32BF6C8CD000F74B7 /* ProfileInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ProfileInterface;
 		};
 		3FB2B2712BF17F280043407C /* AuthServiceInterface */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -15,6 +15,10 @@ import AuthServices
 import AuthServiceInterface
 import HomeInterface
 import Home
+import ProfileInterface
+import Profile
+import OrdersInterface
+import Orders
 
 enum AppDependencyConfigurer {
     @MainActor static func configure() {
@@ -40,5 +44,19 @@ enum AppDependencyConfigurer {
             HomeGateway()
         }
         DC.shared.register(type: .closureBased(homeViewClosure), for: HomeInterface.self)
+        
+        //MARK: - Profile View Registration
+        
+        let profileViewClosure: () -> ProfileInterface = {
+            ProfileGateway()
+        }
+        DC.shared.register(type: .closureBased(profileViewClosure), for: ProfileInterface.self)
+        
+        //MARK: - Orders View Registration
+        
+        let ordersViewClosure: () -> OrdersInterface = {
+            OrdersGateway()
+        }
+        DC.shared.register(type: .closureBased(ordersViewClosure), for: OrdersInterface.self)
     }
 }

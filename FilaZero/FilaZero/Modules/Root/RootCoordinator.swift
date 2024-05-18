@@ -13,7 +13,8 @@ import Login
 import AuthServices
 import DependencyContainer
 import AuthServiceInterface
-
+import ProfileInterface
+import OrdersInterface
 final class RootCoordinator {
     
     private let navigationController: UINavigationController?
@@ -30,8 +31,16 @@ final class RootCoordinator {
         if authService.userSession != nil {
             let gateway = HomeGateway()
             let homeView = gateway.makeHomeModule()
-            let tabBarController = RootTabBarController(viewControllers: [homeView])
+            
+            let gateway1 = DC.shared.resolve(type: .closureBased, for: OrdersInterface.self)
+            let ordersView = gateway1.makeOrdersModule(navigationController: self.navigationController)
+            
+            let gateway2 = DC.shared.resolve(type: .closureBased, for: ProfileInterface.self)
+            let profileView = gateway2.makeProfileModule(navigationController: self.navigationController)
+            
+            let tabBarController = RootTabBarController(viewControllers: [homeView, ordersView, profileView])
             return tabBarController
+            
         } else {
             let gateway = LoginGateway()
             let loginView = gateway.makeLoginModule()

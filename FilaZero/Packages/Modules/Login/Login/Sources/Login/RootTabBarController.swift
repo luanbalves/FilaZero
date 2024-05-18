@@ -25,12 +25,30 @@ public final class RootTabBarController: UITabBarController {
     }
     
     public func updateTabBar() {
-        guard let items = tabBar.items else {
+        guard tabBar.items != nil else {
             return
         }
         
-        let firstItem = items[0]
-        firstItem.title = "Home"
-        firstItem.image = UIImage(systemName: "house")
+        for (index, viewController) in viewControllers!.enumerated() {
+            let title: String
+            let imageName: String
+            
+            switch index {
+            case 0:
+                title = "Home"
+                imageName = "house"
+            case 1:
+                title = "Pedidos"
+                imageName = "pencil.and.list.clipboard"
+            case 2:
+                title = "Perfil"
+                imageName = "person"
+            default:
+                continue
+            }
+            
+            viewController.title = title
+            viewController.tabBarItem.image = UIImage(systemName: imageName)
+        }
     }
 }
