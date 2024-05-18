@@ -81,6 +81,7 @@ struct LoginView: View {
 #Preview {
     LoginView(viewModel: .init(
         registerButtonPressed: {  },
-        authService: AuthServiceMock(), goToHome: {  }
+        authService: AuthServiceMock(),
+        goToHome: {  }
     ))
 }
