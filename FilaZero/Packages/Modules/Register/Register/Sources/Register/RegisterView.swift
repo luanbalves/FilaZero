@@ -16,6 +16,13 @@ struct RegisterView: View {
     
     var body: some View {
         VStack {
+            
+            Picker("Selecione o tipo de conta:", selection: $viewModel.selectedAccountType) {
+                Text("Cliente").tag("Cliente")
+                Text("Loja").tag("Loja")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            
             ImageTextInputField(
                 imageName: "person",
                 placeholder: "Nome",

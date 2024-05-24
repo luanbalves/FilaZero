@@ -14,6 +14,7 @@ import AuthServiceInterface
 import HomeInterface
 import ProfileInterface
 import OrdersInterface
+import StoreHomeInterface
 
 final class LoginCoordinator {
     
@@ -44,23 +45,40 @@ final class LoginCoordinator {
     
     func pushHomeView() {
         DispatchQueue.main.async {
-            if let windowScene = UIApplication.shared.connectedScenes
-                                    .compactMap({ $0 as? UIWindowScene })
-                                    .first(where: { $0.activationState == .foregroundActive }),
-               let window = windowScene.windows.first {
-                
-                let gateway = DC.shared.resolve(type: .closureBased, for: HomeInterface.self)
-                let homeView = gateway.makeHomeModule()
-                
-                let gateway1 = DC.shared.resolve(type: .closureBased, for: OrdersInterface.self)
-                let ordersView = gateway1.makeOrdersModule(navigationController: self.navigationController)
-                
-                let gateway2 = DC.shared.resolve(type: .closureBased, for: ProfileInterface.self)
-                let profileView = gateway2.makeProfileModule(navigationController: self.navigationController)
-                
-                let tabBarController = RootTabBarController(viewControllers: [homeView, ordersView, profileView])
-                window.rootViewController = tabBarController
+            let accountType = UserDefaults.standard.selectedAccountType
+
+            if accountType == "Cliente" {
+                if let windowScene = UIApplication.shared.connectedScenes
+                    .compactMap({ $0 as? UIWindowScene })
+                    .first(where: { $0.activationState == .foregroundActive }),
+                   let window = windowScene.windows.first {
+                    
+                    let gateway = DC.shared.resolve(type: .closureBased, for: HomeInterface.self)
+                    let homeView = gateway.makeHomeModule()
+                    
+                    let gateway1 = DC.shared.resolve(type: .closureBased, for: OrdersInterface.self)
+                    let ordersView = gateway1.makeOrdersModule(navigationController: self.navigationController)
+                    
+                    let gateway2 = DC.shared.resolve(type: .closureBased, for: ProfileInterface.self)
+                    let profileView = gateway2.makeProfileModule(navigationController: self.navigationController)
+                    
+                    let tabBarController = RootTabBarController(viewControllers: [homeView, ordersView, profileView])
+                    window.rootViewController = tabBarController
+                }
+            } else {
+                if let windowScene = UIApplication.shared.connectedScenes
+                    .compactMap({ $0 as? UIWindowScene })
+                    .first(where: { $0.activationState == .foregroundActive }),
+                   let window = windowScene.windows.first {
+                    
+                    let gateway = DC.shared.resolve(type: .closureBased, for: StoreHomeInterface.self)
+                    let homeView = gateway.makeStoreHomeModule()
+                    
+                    let tabBarController = StoreRootTabBarController(viewControllers: [homeView])
+                    window.rootViewController = tabBarController
+                }
             }
+            
         }
     }
 }

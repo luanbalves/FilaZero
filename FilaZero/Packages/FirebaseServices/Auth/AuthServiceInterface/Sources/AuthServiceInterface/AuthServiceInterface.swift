@@ -8,7 +8,7 @@ public protocol AuthServiceInterface {
     var currentUser: CommonModels.User? { get }
     
     func signIn(withEmail email: String, password: String) async throws
-    func createUser(withEmail email: String, password: String, fullname: String) async throws
+    func createUser(withEmail email: String, password: String, fullname: String, accountType: String) async throws
     func signOut()
     func fetchUser() async
 }

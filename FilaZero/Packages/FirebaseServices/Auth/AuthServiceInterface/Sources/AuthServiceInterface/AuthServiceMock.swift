@@ -22,7 +22,7 @@ public class AuthServiceMock: AuthServiceInterface {
         self.currentUser = User.MOCK_USER
     }
     
-    public func createUser(withEmail email: String, password: String, fullname: String) async throws {
+    public func createUser(withEmail email: String, password: String, fullname: String, accountType: String) async throws {
         self.currentUser = User.MOCK_USER
     }
     

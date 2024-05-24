@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F2458242C00097000709900 /* StoreHome in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2458232C00097000709900 /* StoreHome */; };
+		3F2458262C00097000709900 /* StoreHomeInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2458252C00097000709900 /* StoreHomeInterface */; };
 		3F3015AF2BF9487000F5DEB0 /* Orders in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3015AE2BF9487000F5DEB0 /* Orders */; };
 		3F3015B12BF9487000F5DEB0 /* OrdersInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3015B02BF9487000F5DEB0 /* OrdersInterface */; };
 		3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3F61C8442BF2D2FD001E6309 /* HomeInterface */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F2458212C00093A00709900 /* StoreHome */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StoreHome; sourceTree = "<group>"; };
+		3F2458222C00094F00709900 /* StoreHomeInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StoreHomeInterface; sourceTree = "<group>"; };
 		3F3015AC2BF9477E00F5DEB0 /* OrdersInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdersInterface; sourceTree = "<group>"; };
 		3F3015AD2BF9485800F5DEB0 /* Orders */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Orders; sourceTree = "<group>"; };
 		3F61C8432BF2D171001E6309 /* HomeInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeInterface; sourceTree = "<group>"; };
@@ -79,17 +83,36 @@
 				3FB2B27E2BF17F280043407C /* LoginInterface in Frameworks */,
 				3FB2B2782BF17F280043407C /* Components in Frameworks */,
 				3FB2B2822BF17F280043407C /* RegisterInterface in Frameworks */,
+				3F2458262C00097000709900 /* StoreHomeInterface in Frameworks */,
 				3FB2B27A2BF17F280043407C /* Home in Frameworks */,
 				3FB2B27C2BF17F280043407C /* Login in Frameworks */,
 				3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */,
 				3FDB48A62BF17058001BF8E8 /* FirebaseFirestore in Frameworks */,
 				3FB2B2762BF17F280043407C /* CommonModels in Frameworks */,
+				3F2458242C00097000709900 /* StoreHome in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F24581F2C0006DF00709900 /* StoreModules */ = {
+			isa = PBXGroup;
+			children = (
+				3F2458202C00086D00709900 /* Home */,
+			);
+			path = StoreModules;
+			sourceTree = "<group>";
+		};
+		3F2458202C00086D00709900 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3F2458222C00094F00709900 /* StoreHomeInterface */,
+				3F2458212C00093A00709900 /* StoreHome */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		3F3015A02BF9447700F5DEB0 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +184,7 @@
 		3FDB487E2BF16BDE001BF8E8 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				3F24581F2C0006DF00709900 /* StoreModules */,
 				3FB2B2702BF178660043407C /* CommonModels */,
 				3FDB48D22BF174DA001BF8E8 /* FirebaseServices */,
 				3FDB48A92BF170A2001BF8E8 /* Modules */,
@@ -275,6 +299,8 @@
 				3F890ED32BF6C8CD000F74B7 /* ProfileInterface */,
 				3F3015AE2BF9487000F5DEB0 /* Orders */,
 				3F3015B02BF9487000F5DEB0 /* OrdersInterface */,
+				3F2458232C00097000709900 /* StoreHome */,
+				3F2458252C00097000709900 /* StoreHomeInterface */,
 			);
 			productName = FilaZero;
 			productReference = 3FDB485F2BF169F8001BF8E8 /* FilaZero.app */;
@@ -564,6 +590,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F2458232C00097000709900 /* StoreHome */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StoreHome;
+		};
+		3F2458252C00097000709900 /* StoreHomeInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StoreHomeInterface;
+		};
 		3F3015AE2BF9487000F5DEB0 /* Orders */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Orders;
