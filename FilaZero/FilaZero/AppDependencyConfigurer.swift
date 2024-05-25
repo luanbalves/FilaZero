@@ -21,6 +21,8 @@ import OrdersInterface
 import Orders
 import StoreHomeInterface
 import StoreHome
+import StoreServices
+import StoreServicesInterface
 
 enum AppDependencyConfigurer {
     @MainActor static func configure() {
@@ -67,5 +69,9 @@ enum AppDependencyConfigurer {
             StoreHomeGateway()
         }
         DC.shared.register(type: .closureBased(storeHomeViewClosure), for: StoreHomeInterface.self)
+        
+        //MARK: - Store Services Registration
+        let storeServices = StoreServices()
+        DC.shared.register(type: .singlesInstance(storeServices), for: StoreServicesInterface.self)
     }
 }

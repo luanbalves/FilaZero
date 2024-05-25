@@ -23,6 +23,8 @@
 		3FB2B27E2BF17F280043407C /* LoginInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B27D2BF17F280043407C /* LoginInterface */; };
 		3FB2B2802BF17F280043407C /* Register in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B27F2BF17F280043407C /* Register */; };
 		3FB2B2822BF17F280043407C /* RegisterInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3FB2B2812BF17F280043407C /* RegisterInterface */; };
+		3FC01F602C026381004D69B8 /* StoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC01F5F2C026381004D69B8 /* StoreServices */; };
+		3FC01F622C026381004D69B8 /* StoreServicesInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC01F612C026381004D69B8 /* StoreServicesInterface */; };
 		3FDB48632BF169F8001BF8E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB48622BF169F8001BF8E8 /* AppDelegate.swift */; };
 		3FDB48652BF169F8001BF8E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB48642BF169F8001BF8E8 /* SceneDelegate.swift */; };
 		3FDB48672BF169F8001BF8E8 /* AppDependencyConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB48662BF169F8001BF8E8 /* AppDependencyConfigurer.swift */; };
@@ -47,6 +49,8 @@
 		3FB2B26E2BF176F10043407C /* AuthServiceInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServiceInterface; sourceTree = "<group>"; };
 		3FB2B26F2BF177980043407C /* AuthServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthServices; sourceTree = "<group>"; };
 		3FB2B2702BF178660043407C /* CommonModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonModels; sourceTree = "<group>"; };
+		3FC01F5D2C026352004D69B8 /* StoreServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StoreServices; sourceTree = "<group>"; };
+		3FC01F5E2C026364004D69B8 /* StoreServicesInterface */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StoreServicesInterface; sourceTree = "<group>"; };
 		3FDB485F2BF169F8001BF8E8 /* FilaZero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilaZero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FDB48622BF169F8001BF8E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FDB48642BF169F8001BF8E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,11 +88,13 @@
 				3FB2B2782BF17F280043407C /* Components in Frameworks */,
 				3FB2B2822BF17F280043407C /* RegisterInterface in Frameworks */,
 				3F2458262C00097000709900 /* StoreHomeInterface in Frameworks */,
+				3FC01F622C026381004D69B8 /* StoreServicesInterface in Frameworks */,
 				3FB2B27A2BF17F280043407C /* Home in Frameworks */,
 				3FB2B27C2BF17F280043407C /* Login in Frameworks */,
 				3F61C8452BF2D2FD001E6309 /* HomeInterface in Frameworks */,
 				3FDB48A62BF17058001BF8E8 /* FirebaseFirestore in Frameworks */,
 				3FB2B2762BF17F280043407C /* CommonModels in Frameworks */,
+				3FC01F602C026381004D69B8 /* StoreServices in Frameworks */,
 				3F2458242C00097000709900 /* StoreHome in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +135,15 @@
 				3F890ECF2BF6C72D000F74B7 /* ProfileInterface */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		3FC01F5B2C0255DB004D69B8 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				3FC01F5E2C026364004D69B8 /* StoreServicesInterface */,
+				3FC01F5D2C026352004D69B8 /* StoreServices */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		3FDB48562BF169F8001BF8E8 = {
@@ -251,6 +266,7 @@
 		3FDB48D22BF174DA001BF8E8 /* FirebaseServices */ = {
 			isa = PBXGroup;
 			children = (
+				3FC01F5B2C0255DB004D69B8 /* Store */,
 				3FDB48D32BF174E2001BF8E8 /* Auth */,
 			);
 			path = FirebaseServices;
@@ -301,6 +317,8 @@
 				3F3015B02BF9487000F5DEB0 /* OrdersInterface */,
 				3F2458232C00097000709900 /* StoreHome */,
 				3F2458252C00097000709900 /* StoreHomeInterface */,
+				3FC01F5F2C026381004D69B8 /* StoreServices */,
+				3FC01F612C026381004D69B8 /* StoreServicesInterface */,
 			);
 			productName = FilaZero;
 			productReference = 3FDB485F2BF169F8001BF8E8 /* FilaZero.app */;
@@ -653,6 +671,14 @@
 		3FB2B2812BF17F280043407C /* RegisterInterface */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RegisterInterface;
+		};
+		3FC01F5F2C026381004D69B8 /* StoreServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StoreServices;
+		};
+		3FC01F612C026381004D69B8 /* StoreServicesInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StoreServicesInterface;
 		};
 		3FDB48A22BF16EEA001BF8E8 /* DependencyContainer */ = {
 			isa = XCSwiftPackageProductDependency;

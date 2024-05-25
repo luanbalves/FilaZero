@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import DependencyContainer
+import StoreServicesInterface
 
 final class StoreHomeCoordinator {
     private let navigationController: UINavigationController = {
@@ -15,11 +17,28 @@ final class StoreHomeCoordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         return navigationController
     }()
-    
+    private let storeServices = DC.shared.resolve(type: .singleInstance, for: StoreServicesInterface.self)
+
     func makeViewController() -> UIViewController {
-        let homeView = StoreHomeView()
+        let homeView = StoreHomeView(
+            viewModel: .init(
+                goToAddStore: pushAddStoreView,
+                storeServices: storeServices
+            )
+        )
         let hostingVC = UIHostingController(rootView: homeView)
         navigationController.setViewControllers([hostingVC], animated: false)
         return navigationController
+    }
+    
+    func pushAddStoreView() {
+        let addStoreView = AddStoreView(
+            viewModel: .init(
+                goToAddStore: {},
+                storeServices: storeServices
+            )
+        )
+        let hostingVC = UIHostingController(rootView: addStoreView)
+        navigationController.present(hostingVC, animated: true)
     }
 }

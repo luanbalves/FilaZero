@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestore
 import CommonModels
 import AuthServiceInterface
+import FirebaseAuth
 
 public protocol AuthFormProtocol {
     var formIsValid: Bool { get }

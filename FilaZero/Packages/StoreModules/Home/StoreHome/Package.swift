@@ -4,9 +4,11 @@
 import PackageDescription
 
 private let StoreHomeInterface = "StoreHomeInterface"
+private let storeServicesInterface = "StoreServicesInterface"
+private let dependencyContainer = "DependencyContainer"
 let package = Package(
     name: "StoreHome",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -14,7 +16,9 @@ let package = Package(
             targets: ["StoreHome"]),
     ],
     dependencies: [
-        .package(name: StoreHomeInterface, path: "../\(StoreHomeInterface)")
+        .package(name: StoreHomeInterface, path: "../\(StoreHomeInterface)"),
+        .package(name: storeServicesInterface, path: "../../../FirebaseServices/Store/\(storeServicesInterface)"),
+        .package(name: dependencyContainer, path: "../../../\(dependencyContainer)")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -22,7 +26,9 @@ let package = Package(
         .target(
             name: "StoreHome",
             dependencies: [
-                .product(name: StoreHomeInterface, package: StoreHomeInterface)
+                .product(name: StoreHomeInterface, package: StoreHomeInterface),
+                .product(name: storeServicesInterface, package: storeServicesInterface),
+                .product(name: dependencyContainer, package: dependencyContainer)
             ]
         ),
         .testTarget(
