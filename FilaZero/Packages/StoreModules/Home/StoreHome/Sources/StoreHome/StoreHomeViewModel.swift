@@ -7,12 +7,13 @@
 
 import Foundation
 import StoreServicesInterface
+import CommonModels
 
 final class StoreHomeViewModel: ObservableObject {
     private let goToAddStore: () -> Void
     @Published var storeName = ""
     @Published var description = ""
-    
+    @Published var selectedStore: Store? = nil
     var storeServices: StoreServicesInterface
     
     init(goToAddStore: @escaping () -> Void, storeServices: StoreServicesInterface) {
@@ -35,4 +36,17 @@ final class StoreHomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchStore() {
+        Task {
+            do {
+                selectedStore = try await storeServices.fetchStoresStoreSide()
+                #warning("Fazer alerta de sucesso e dar dismiss")
+            } catch {
+                print(error.localizedDescription)
+                #warning("Fazer alerta de erro")
+            }
+        }
+    }
+    
 }

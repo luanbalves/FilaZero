@@ -6,6 +6,7 @@ import PackageDescription
 private let firebaseFirestore = "FirebaseFirestore"
 private let firebaseIosSdk = "firebase-ios-sdk"
 private let commonModels = "CommonModels"
+private let firebaseAuth = "FirebaseAuth"
 
 let package = Package(
     name: "StoreServicesInterface",
@@ -28,6 +29,7 @@ let package = Package(
             dependencies: [
                 .product(name: firebaseFirestore, package: firebaseIosSdk),
                 .product(name: commonModels, package: commonModels),
+                .product(name: firebaseAuth, package: firebaseIosSdk)
             ]
         ),
         .testTarget(

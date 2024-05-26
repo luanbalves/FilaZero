@@ -35,7 +35,6 @@ final class LoginViewModel: ObservableObject {
             do {
                 UserDefaults.standard.selectedAccountType = selectedAccountType
                 try await authService.signIn(withEmail: email, password: password)
-                print(selectedAccountType)
                 goToHome()
             } catch {
                 print(error.localizedDescription)

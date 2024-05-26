@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseAuth
 import SwiftUI
 import PhotosUI
 import CommonModels
@@ -26,7 +27,7 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
     }
     
     public init() {
-        Task { try await fetchStores() }
+        Task { try await fetchStoresClientSide() }
     }
     
     public func loadImage(fromItem item: PhotosPickerItem?) async {
@@ -39,17 +40,24 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
     
     public func uploadStore(name: String, description: String) async throws {
         guard let uiImage = uiImage else { return }
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         
         let storeRef = Firestore.firestore().collection("stores").document()
         guard let imageUrl = try await ImageUploader.uploadImage(image: uiImage) else { return }
-        let stores = Store(id: storeRef.documentID, name: name, description: description, selectedImage: imageUrl)
+        let stores = Store(id: storeRef.documentID, name: name, description: description, selectedImage: imageUrl, userID: userID)
         guard let encodedStores = try? Firestore.Encoder().encode(stores) else { return }
         try await storeRef.setData(encodedStores)
     }
     
     
-    public func fetchStores() async throws {
+    public func fetchStoresClientSide() async throws {
         let snapshot = try await Firestore.firestore().collection("stores").getDocuments()
         self.stores = try snapshot.documents.compactMap({ try $0.data(as: Store.self ) })
+    }
+    
+    public func fetchStoresStoreSide() async throws -> Store?{
+        guard let userID = Auth.auth().currentUser?.uid else { return nil }
+        let snapshot = try await Firestore.firestore().collection("stores").whereField("userID", isEqualTo: userID).getDocuments()
+        return try snapshot.documents.compactMap({ try $0.data(as: Store.self)}).first
     }
 }

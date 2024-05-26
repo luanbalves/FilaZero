@@ -19,5 +19,8 @@ public protocol StoreServicesInterface {
     func uploadStore(name: String, description: String) async throws
     
     
-    func fetchStores() async throws
+    func fetchStoresClientSide() async throws
+    
+    func fetchStoresStoreSide() async throws -> Store?
+
 }
