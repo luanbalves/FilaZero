@@ -50,9 +50,9 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
     }
     
     
-    public func fetchStoresClientSide() async throws {
+    public func fetchStoresClientSide() async throws -> [Store?] {
         let snapshot = try await Firestore.firestore().collection("stores").getDocuments()
-        self.stores = try snapshot.documents.compactMap({ try $0.data(as: Store.self ) })
+        return try snapshot.documents.compactMap({ try $0.data(as: Store.self)})
     }
     
     public func fetchStoresStoreSide() async throws -> Store?{

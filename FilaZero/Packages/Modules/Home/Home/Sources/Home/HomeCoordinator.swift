@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import DependencyContainer
+import StoreServicesInterface
 
 final class HomeCoordinator {
     private let navigationController: UINavigationController = {
@@ -17,7 +19,12 @@ final class HomeCoordinator {
     }()
     
     func makeViewController() -> UIViewController {
-        let homeView = HomeView()
+        let storeServices = DC.shared.resolve(type: .singleInstance, for: StoreServicesInterface.self)
+        let homeView = HomeView(
+            viewModel: .init(
+                storeServices: storeServices
+            )
+        )
         let hostingVC = UIHostingController(rootView: homeView)
         navigationController.setViewControllers([hostingVC], animated: false)
         return navigationController

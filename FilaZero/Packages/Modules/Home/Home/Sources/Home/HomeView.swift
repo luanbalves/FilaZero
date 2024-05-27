@@ -8,25 +8,46 @@
 import SwiftUI
 import AuthServiceInterface
 import FirebaseAuth
+import StoreServicesInterface
+import Kingfisher
 
 struct HomeView: View {
+    @ObservedObject var viewModel: HomeViewModel
+    
     var body: some View {
-        Text("FilaZero")
-        Button {
-            Task {
-                do {
-                    try await Auth.auth().signOut()
-                } catch {
-                    print(error.localizedDescription)
-                }
+        VStack {
+            
+            ForEach(viewModel.filteredStores) { store in
+                KFImage(URL(string: store.selectedImage))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 90, height: 90)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                Text(store.name)
+                Text(store.description)
             }
-        } label: {
-            Text("Sair")
+            
+            Button {
+                Task {
+                    do {
+                        try await Auth.auth().signOut()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            } label: {
+                Text("Sair")
+            }
         }
-
+        .searchable(text: $viewModel.searchText, prompt: "Pesquisar")
+        .onAppear {
+            Task {
+                viewModel.fetchStores()
+            }
+        }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: .init(storeServices: StoreServiceMock()))
 }

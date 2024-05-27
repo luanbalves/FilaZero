@@ -10,7 +10,7 @@ public protocol StoreServicesInterface {
     
     var stores: [Store] { get }
     
-    var searchText: String { get }
+    var searchText: String { get set }
     
     var filteredStores: [Store] { get }
     
@@ -19,7 +19,7 @@ public protocol StoreServicesInterface {
     func uploadStore(name: String, description: String) async throws
     
     
-    func fetchStoresClientSide() async throws
+    func fetchStoresClientSide() async throws -> [Store?]
     
     func fetchStoresStoreSide() async throws -> Store?
 

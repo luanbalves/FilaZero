@@ -11,8 +11,8 @@ import PhotosUI
 import CommonModels
 
 public class StoreServiceMock: StoreServicesInterface {
-    public func fetchStoresClientSide() async throws {
-        
+    public func fetchStoresClientSide() async throws -> [Store?] {
+        return [nil]
     }
     
     public func fetchStoresStoreSide() async throws -> Store? {
