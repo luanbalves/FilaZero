@@ -18,12 +18,19 @@ struct StoreHomeView: View {
             if let store = viewModel.selectedStore {
                 KFImage(URL(string: store.selectedImage))
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: 90, height: 90)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .scaledToFit()
                 
                 Text(store.name)
                 Text(store.description)
+                
+                ForEach(store.products) { product in
+                    VStack {
+                        Text(product.name)
+                        Text(product.description)
+                        Text(String(format: "%.2f", product.price))
+                    }
+                }
+                
             } else {
                 ProgressView("Carregando...")
                     .onAppear {
@@ -36,6 +43,11 @@ struct StoreHomeView: View {
                 viewModel.didPressAddButton()
             } label: {
                 Image(systemName: "plus.circle")
+            }
+            Button {
+                viewModel.didPressAddProductButton()
+            } label: {
+                Text("Adicionar Produto")
             }
             Button {
                 Task {
@@ -58,7 +70,7 @@ struct StoreHomeView: View {
 }
 
 #Preview {
-    StoreHomeView(viewModel: .init(goToAddStore: {}, storeServices: StoreServiceMock()))
+    StoreHomeView(viewModel: .init(goToAddStore: {}, storeServices: StoreServiceMock(), goToAddProductStore: {}))
     //    AddStoreView(viewModel: .init(goToAddStore: {}, storeServices: StoreServiceMock()))
 }
 
@@ -111,6 +123,44 @@ struct AddStoreView: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity)
             }
+        }
+    }
+}
+
+struct AddProductView: View {
+    @ObservedObject var viewModel: StoreHomeViewModel
+
+    var body: some View {
+        Form {
+            Section {
+                TextField("Digite o nome do produto", text: $viewModel.productName)
+            } header: {
+                Text("Nome do produto")
+            }
+            
+            Section {
+                TextField("Digite a descrição do produto", text: $viewModel.productDescription)
+            } header: {
+                Text("Descrição do produto")
+            }
+            
+            Section {
+                TextField("Digite o preço do produto", value: $viewModel.productPrice, format: .number)
+                    .keyboardType(.decimalPad)
+            } header: {
+                Text("Nome do produto")
+            }
+            
+            Section {
+                Button("Adicionar Produto") {
+                    Task {
+                        viewModel.addProduct()
+                    }
+                }
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity)
+            }
+
         }
     }
 }

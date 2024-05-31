@@ -11,6 +11,8 @@ import PhotosUI
 import CommonModels
 
 public class StoreServiceMock: StoreServicesInterface {
+    public var products: [CommonModels.Product] = [CommonModels.Product.MOCK_PRODUCT]
+    
     public func fetchStoresClientSide() async throws -> [Store?] {
         return [nil]
     }
@@ -44,4 +46,11 @@ public class StoreServiceMock: StoreServicesInterface {
         
     }
     
+    public func addProductToStore(product: Product) async throws {
+        
+    }
+    
+    public func fetchProducts(for storeID: String) async throws {
+        
+    }
 }

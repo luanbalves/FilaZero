@@ -23,7 +23,8 @@ final class StoreHomeCoordinator {
         let homeView = StoreHomeView(
             viewModel: .init(
                 goToAddStore: pushAddStoreView,
-                storeServices: storeServices
+                storeServices: storeServices,
+                goToAddProductStore: pushAddProductView
             )
         )
         let hostingVC = UIHostingController(rootView: homeView)
@@ -35,10 +36,23 @@ final class StoreHomeCoordinator {
         let addStoreView = AddStoreView(
             viewModel: .init(
                 goToAddStore: {},
-                storeServices: storeServices
+                storeServices: storeServices,
+                goToAddProductStore: {}
             )
         )
         let hostingVC = UIHostingController(rootView: addStoreView)
+        navigationController.present(hostingVC, animated: true)
+    }
+    
+    func pushAddProductView() {
+        let addProductView = AddProductView(
+            viewModel: .init(
+                goToAddStore: {},
+                storeServices: storeServices,
+                goToAddProductStore: {}
+            )
+        )
+        let hostingVC = UIHostingController(rootView: addProductView)
         navigationController.present(hostingVC, animated: true)
     }
 }

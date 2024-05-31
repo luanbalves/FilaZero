@@ -16,17 +16,18 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            
-            ForEach(viewModel.filteredStores) { store in
-                KFImage(URL(string: store.selectedImage))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 90, height: 90)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                Text(store.name)
-                Text(store.description)
+            List {
+                ForEach(viewModel.filteredStores) { store in
+                    StoreRow(
+                        storeName: store.name,
+                        storeDescription: store.description,
+                        storeImage: store.selectedImage
+                    )
+                }
             }
-            
+            .refreshable {
+                viewModel.fetchStores()
+            }
             Button {
                 Task {
                     do {
@@ -50,4 +51,33 @@ struct HomeView: View {
 
 #Preview {
     HomeView(viewModel: .init(storeServices: StoreServiceMock()))
+}
+
+struct StoreRow: View {
+    
+    var storeName: String
+    var storeDescription: String
+    var storeImage: String
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            KFImage(URL(string: storeImage))
+                .resizable()
+                .scaledToFill()
+                .frame(width: 70, height: 70)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            
+            VStack {
+                Text(storeName)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                
+                Text(storeDescription)
+                    .font(.footnote)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .padding(.trailing, 8)
+            }
+        }
+    }
 }

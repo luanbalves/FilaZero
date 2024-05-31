@@ -15,9 +15,11 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
     public var uiImage: UIImage?
     
     @Published public var stores = [Store]()
-    
+    @Published public var products: [Product] = []
+
     @Published public var searchText = ""
     
+    private var storeID: String?
     public var filteredStores: [Store] {
         if searchText.isEmpty {
             return stores
@@ -44,7 +46,7 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
         
         let storeRef = Firestore.firestore().collection("stores").document()
         guard let imageUrl = try await ImageUploader.uploadImage(image: uiImage) else { return }
-        let stores = Store(id: storeRef.documentID, name: name, description: description, selectedImage: imageUrl, userID: userID)
+        let stores = Store(id: storeRef.documentID, name: name, description: description, selectedImage: imageUrl, userID: userID, products: [])
         guard let encodedStores = try? Firestore.Encoder().encode(stores) else { return }
         try await storeRef.setData(encodedStores)
     }
@@ -58,6 +60,33 @@ public final class StoreServices: ObservableObject, StoreServicesInterface {
     public func fetchStoresStoreSide() async throws -> Store?{
         guard let userID = Auth.auth().currentUser?.uid else { return nil }
         let snapshot = try await Firestore.firestore().collection("stores").whereField("userID", isEqualTo: userID).getDocuments()
-        return try snapshot.documents.compactMap({ try $0.data(as: Store.self)}).first
+        let store = try snapshot.documents.compactMap { try $0.data(as: Store.self) }.first
+        self.storeID = store?.id
+        return store
+    }
+    
+    public func addProductToStore(product: Product) async throws {
+        guard let storeID = storeID else { return }
+        
+        let storeRef = Firestore.firestore().collection("stores").document(storeID)
+        let storeDocument = try await storeRef.getDocument()
+        
+        guard let storeData = storeDocument.data() else {
+            print("Store not found.")
+            return
+        }
+        
+        var store = try Firestore.Decoder().decode(Store.self, from: storeData)
+        store.products.append(product)
+        let productsArray = store.products.map { $0.toDictionary() }
+        
+        try await storeRef.updateData(["products": productsArray])
+    }
+
+
+    
+    public func fetchProducts(for storeID: String) async throws {
+        let snapshot = try await Firestore.firestore().collection("products").whereField("storeID", isEqualTo: storeID).getDocuments()
+        self.products = try snapshot.documents.compactMap { try $0.data(as: Product.self) }
     }
 }
