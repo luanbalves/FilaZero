@@ -10,6 +10,7 @@ import AuthServiceInterface
 import FirebaseAuth
 import StoreServicesInterface
 import Kingfisher
+import CommonModels
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
@@ -23,6 +24,10 @@ struct HomeView: View {
                         storeDescription: store.description,
                         storeImage: store.selectedImage
                     )
+                    .onTapGesture {
+                        viewModel.fetchProducts(for: store.id)
+                        viewModel.didPressAtStore(store)
+                    }
                 }
             }
             .refreshable {
@@ -50,7 +55,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: .init(storeServices: StoreServiceMock()))
+    HomeView(viewModel: .init(storeServices: StoreServiceMock(), goToStore: { _ in  }))
 }
 
 struct StoreRow: View {
@@ -77,6 +82,22 @@ struct StoreRow: View {
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .padding(.trailing, 8)
+            }
+        }
+    }
+}
+
+struct StoreView: View {
+    let selectedStore: Store
+    
+    var body: some View {
+        VStack {
+            ForEach(selectedStore.products) { product in
+                VStack {
+                    Text(product.name)
+                    Text(product.description)
+                    Text(String(format: "%.2f", product.price))
+                }
             }
         }
     }

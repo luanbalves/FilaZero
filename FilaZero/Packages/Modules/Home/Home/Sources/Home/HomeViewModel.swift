@@ -13,9 +13,10 @@ final class HomeViewModel: ObservableObject {
     var storeServices: StoreServicesInterface
     @Published var stores: [Store?] = [nil]
     @Published var searchText = ""
-    
-    init(storeServices: StoreServicesInterface) {
+    private let goToStore: (Store) -> Void
+    init(storeServices: StoreServicesInterface, goToStore: @escaping (Store) -> Void) {
         self.storeServices = storeServices
+        self.goToStore = goToStore
     }
     
     var filteredStores: [Store] {
@@ -41,5 +42,20 @@ final class HomeViewModel: ObservableObject {
                 #warning("Fazer alerta erro")
             }
         }
+    }
+    
+    func fetchProducts(for storeID: String) {
+        Task {
+            do {
+                try await storeServices.fetchProducts(for: storeID)
+            } catch {
+                print(error.localizedDescription)
+                #warning("Fazer alerta")
+            }
+        }
+    }
+    
+    func didPressAtStore(_ selectedStore: Store) {
+        goToStore(selectedStore)
     }
 }

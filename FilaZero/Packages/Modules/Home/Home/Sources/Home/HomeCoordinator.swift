@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import DependencyContainer
 import StoreServicesInterface
+import CommonModels
 
 final class HomeCoordinator {
     private let navigationController: UINavigationController = {
@@ -22,11 +23,18 @@ final class HomeCoordinator {
         let storeServices = DC.shared.resolve(type: .singleInstance, for: StoreServicesInterface.self)
         let homeView = HomeView(
             viewModel: .init(
-                storeServices: storeServices
+                storeServices: storeServices,
+                goToStore: pushStoreView(_:)
             )
         )
         let hostingVC = UIHostingController(rootView: homeView)
         navigationController.setViewControllers([hostingVC], animated: false)
         return navigationController
+    }
+    
+    func pushStoreView(_ selectedStore: Store) {
+        let storeView = StoreView(selectedStore: selectedStore)
+        let hostingVC = UIHostingController(rootView: storeView)
+        navigationController.pushViewController(hostingVC, animated: true)
     }
 }
