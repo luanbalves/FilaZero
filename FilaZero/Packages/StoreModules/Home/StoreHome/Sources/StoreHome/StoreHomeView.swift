@@ -23,12 +23,33 @@ struct StoreHomeView: View {
                 Text(store.name)
                 Text(store.description)
                 
+                Text("PRODUTOS")
+                    .font(.title)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 8)
+                    .foregroundColor(.primary)
+                    .background(
+                        Color.accentColor
+                            .frame(height: 5)
+                            .offset(y: 24)
+                    )
+                
                 ForEach(store.products) { product in
-                    VStack {
-                        Text(product.name)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(product.name)
+                                .bold()
+                            Spacer()
+                            Text(String(format: "R$ %.2f", product.price))
+                                .padding(.horizontal)
+                                .fontWeight(.semibold)
+                        }
                         Text(product.description)
-                        Text(String(format: "%.2f", product.price))
+                            .font(.footnote)
                     }
+                    .padding()
+                    .background(Divider().frame(width: UIScreen.main.bounds.width - 35), alignment: .bottom)
                 }
                 
             } else {
@@ -66,6 +87,7 @@ struct StoreHomeView: View {
                 viewModel.fetchStore()
             }
         }
+        .ignoresSafeArea()
     }
 }
 
