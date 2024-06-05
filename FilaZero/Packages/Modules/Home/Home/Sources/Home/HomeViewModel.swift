@@ -14,9 +14,12 @@ final class HomeViewModel: ObservableObject {
     @Published var stores: [Store?] = [nil]
     @Published var searchText = ""
     private let goToStore: (Store) -> Void
-    init(storeServices: StoreServicesInterface, goToStore: @escaping (Store) -> Void) {
+    private let goToCart: () -> Void
+    
+    init(storeServices: StoreServicesInterface, goToStore: @escaping (Store) -> Void, goToCart: @escaping () -> Void) {
         self.storeServices = storeServices
         self.goToStore = goToStore
+        self.goToCart = goToCart
     }
     
     var filteredStores: [Store] {
@@ -57,5 +60,61 @@ final class HomeViewModel: ObservableObject {
     
     func didPressAtStore(_ selectedStore: Store) {
         goToStore(selectedStore)
+    }
+    
+    func didPressCart() {
+        goToCart()
+    }
+}
+
+final class CartViewModel: ObservableObject {
+    @Published var cartManager: CartManager
+    
+    init(cartManager: CartManager) {
+        self.cartManager = cartManager
+    }
+}
+
+
+final class CartManager: ObservableObject {
+    @Published var cartItems: [Product] = []
+    
+    func addToCart(_ product: Product) {
+        cartItems.append(product)
+    }
+    
+    var cartItemCount: Int {
+        cartItems.count
+    }
+    
+    var totalItemCount: Int {
+        cartItems.count
+    }
+    
+    var totalPrice: Double {
+        Double(cartItems.reduce(0) { $0 + $1.price })
+    }
+}
+
+final class StoreViewModel: ObservableObject {
+    var storeServices: StoreServicesInterface
+    var selectedStore: Store
+    @Published var cartManager: CartManager
+    
+    private let goToCart: () -> Void
+    
+    init(storeServices: StoreServicesInterface, selectedStore: Store, cartManager: CartManager, goToCart: @escaping () -> Void) {
+        self.storeServices = storeServices
+        self.selectedStore = selectedStore
+        self.cartManager = cartManager
+        self.goToCart = goToCart
+    }
+    
+    func addToCart(_ product: Product) {
+        cartManager.addToCart(product)
+    }
+    
+    func didPressCart() {
+        goToCart()
     }
 }

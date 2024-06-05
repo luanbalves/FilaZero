@@ -18,23 +18,32 @@ final class HomeCoordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         return navigationController
     }()
-    
+    private let storeServices = DC.shared.resolve(type: .singleInstance, for: StoreServicesInterface.self)
+    private var cartManager = CartManager()
+
     func makeViewController() -> UIViewController {
-        let storeServices = DC.shared.resolve(type: .singleInstance, for: StoreServicesInterface.self)
         let homeView = HomeView(
             viewModel: .init(
                 storeServices: storeServices,
-                goToStore: pushStoreView(_:)
+                goToStore: pushStoreView(_:),
+                goToCart: pushCartView
             )
         )
+            .environmentObject(cartManager)
         let hostingVC = UIHostingController(rootView: homeView)
         navigationController.setViewControllers([hostingVC], animated: false)
         return navigationController
     }
     
     func pushStoreView(_ selectedStore: Store) {
-        let storeView = StoreView(selectedStore: selectedStore)
+        let storeView = StoreView(viewModel: .init(storeServices: storeServices, selectedStore: selectedStore, cartManager: cartManager, goToCart: pushCartView)).environmentObject(cartManager)
         let hostingVC = UIHostingController(rootView: storeView)
         navigationController.pushViewController(hostingVC, animated: true)
+    }
+    
+    func pushCartView() {
+        let cartView = CartView(viewModel: .init(cartManager: cartManager)).environmentObject(cartManager)
+        let hostingVC = UIHostingController(rootView: cartView)
+        navigationController.present(hostingVC, animated: true)
     }
 }
